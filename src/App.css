@@ -1,0 +1,144 @@
+*{box-sizing: border-box;}
+#root {
+  /* max-width: 1280px; */
+  min-height: 100vh;   /* FULL screen height */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /* text-align: center; */
+  /* background-color: rgb(27, 25, 25); */
+  background-color:#1e1e2f ;
+}
+
+
+/* Navbar container */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e1e2f; /* Dark background */
+  padding: 0.75rem 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  width: 100%;
+}
+
+/* Nav links container */
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-right: 1.5rem;
+  font-weight: 500;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  padding-bottom: 4px;
+}
+
+/* Hover effect */
+nav a:hover {
+  color: #ffb347; /* Soft accent color */
+  border-bottom: 2px solid #ffb347;
+}
+
+/* Active link */
+nav a.active {
+  color: #fff;
+  border-bottom: 2px solid #ff4d4f;
+}
+
+/* Logout button */
+nav button {
+  background-color: #ff4d4f;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Logout hover */
+nav button:hover {
+  background-color: #ff7875;
+}
+
+/* Responsive: stack links vertically on small screens */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav a {
+    margin: 0.5rem 0;
+  }
+
+  nav button {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Disable homepage when not authenticated */
+.content-wrapper.disabled {
+  filter: blur(4px);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.6;
+  overflow: auto;
+}
+/* Fullscreen background blocker */
+.login-overlay {
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(1px);
+  z-index: 9999;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+}
+
+/* Right-side sliding panel */
+.login-panel {
+  width: 420px;
+  max-width: 90%;
+}
+.layer1{margin: 0px;background: #111;color: whitesmoke;}
+.layer1 {
+  background-image: url("./cutting.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* min-height: 100vh; */
+  height: 100vh;
+  text-align: center;
+  padding-top: 3rem;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  /* box-shadow: 0 10px 30px rgba(0,0,0,0.35); */
+   filter: brightness(0.7);
+}
+.up{size: 50px;}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  
+}
+.card-grid img {
+  filter: brightness(0.3) contrast(1.1) sharpen(0.2);
+  width: 100%; /* Make the image fill its container */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover;
+  
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}

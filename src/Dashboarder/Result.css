@@ -1,0 +1,152 @@
+/* ===== Global Styling ===== */
+.check-result-container {
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 25px;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #4e9af1, #6a5af9);
+  background-clip: text;
+  color: transparent;
+}
+
+/* ===== Form Styling ===== */
+.result-form {
+  background: rgba(73, 48, 48, 0.05);
+  padding: 20px;
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+  animation: slideDown 0.6s ease;
+}
+
+.form-group {
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #dcdcdc;
+  outline: none;
+  transition: 0.3s;
+}
+
+select:focus {
+  border-color: #4e9af1;
+  box-shadow: 0 0 8px rgba(78, 154, 241, 0.4);
+}
+
+.check-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background: linear-gradient(90deg, #4e9af1, #6a5af9);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.check-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(78, 154, 241, 0.4);
+}
+
+.check-btn:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+
+/* ===== Result Card ===== */
+.result-card {
+  background:rgba(73, 48, 48, 0.05);
+  padding: 25px;
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+  animation: fadeIn 0.8s ease;
+}
+
+.result-card h3 {
+  font-size: 26px;
+  background: linear-gradient(90deg, #6a5af9, #4e9af1);
+  /* -webkit-background-clip: text; */
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 10px;
+}
+
+/* ===== Table Styling ===== */
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.result-table thead {
+  background: linear-gradient(90deg, #4a8cd8, #6a5af9);
+  color: white;
+}
+
+.result-table th,
+.result-table td {
+  padding: 12px;
+  font-size: 15px;
+}
+
+.result-table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.result-table tbody tr:hover {
+  background: rgba(78, 154, 241, 0.1);
+  transform: scale(1.01);
+  transition: 0.2s;
+}
+
+/* ===== Summary Section ===== */
+.summary {
+  margin-top: 20px;
+  text-align: left;
+  background: rgba(90, 66, 66, 0.4);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.summary p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

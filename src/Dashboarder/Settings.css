@@ -1,0 +1,121 @@
+/* settings.css */
+
+.settings-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(209, 176, 176, 0.247);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Tab Navigation --- */
+.tab-navigation {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.tab-navigation button {
+    flex-grow: 1;
+    padding: 15px 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-navigation button:hover:not(.active) {
+    background-color: #eee;
+}
+
+.tab-navigation button.active {
+    color: black; /* Primary color */
+    border-bottom: 3px solid #007bff;
+    background-color: #fff;
+}
+
+/* --- Form Styling (Applied to Payment, Password, Profile) --- */
+.payment-form, .password-form, .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: #e9baba;
+    border-radius: 6px;
+    border: 1px solid #eee;
+}
+
+.payment-form h3, .password-form h3, .profile-form h3 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 10px;
+}
+
+.payment-form input, 
+.password-form input, 
+.profile-form input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.profile-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    gap: 5px;
+}
+
+/* --- Button Styling --- */
+.payment-form button, 
+.password-form button, 
+.profile-form button {
+    padding: 12px 20px;
+    background-color: #28a745; /* Green for action */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.payment-form button:hover, 
+.password-form button:hover, 
+.profile-form button:hover {
+    background-color:#218838
+}
+
+.payment-form button:disabled, 
+.password-form button:disabled, 
+.profile-form button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+}
+
+/* --- Message/Feedback Styling --- */
+.success {
+    color: #28a745;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
