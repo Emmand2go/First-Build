@@ -4,17 +4,20 @@ import './Cards.css'
 const Formal = () => {
    const [showForm, setShowForm] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedPrice, setSelectedPrice] = useState("");
   const [user,setUser]=useState('');
    const [minDate, setMinDate] = useState('');
 
-  const handleCardClick = (cardTitle) => {
+  const handleCardClick = (cardTitle,price) => {
     setSelectedCard(cardTitle);
+    setSelectedPrice(price);
     setShowForm(true);
   };
 
   const closeForm = () => {
     setShowForm(false);
     setSelectedCard(null);
+    setSelectedPrice(null)
   };
 
  useEffect(() => {
@@ -37,37 +40,49 @@ return (
   <>
     <div className='container'>
       
-      <div className='card' onClick={() => handleCardClick("Formal Wear")}>
+      <div className='card' onClick={() => handleCardClick("Formal Wear",30000)}>
         <img
-          src="https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg"
+          // src="https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg"
+          src="https://i.pinimg.com/736x/f8/85/5e/f8855eca2d50a8f58091a5f2443c0e5b.jpg"
           alt="Formal wear 1"
           
         />
+        <div className="card-text">
+    <h3>T-shirt</h3>
+    <p>₦30000</p>
+  </div>
       </div>
 
-      <div className='card' onClick={() => handleCardClick("Formal Wear1")}>
+      <div className='card' onClick={() => handleCardClick("Formal Wear1",45000)}>
         <img
-          src="https://images.pexels.com/photos/845434/pexels-photo-845434.jpeg"
+          // src="https://images.pexels.com/photos/845434/pexels-photo-845434.jpeg"
+          src="https://5.imimg.com/data5/EU/OR/MN/SELLER-34697614/l8-500x500.jpg"
           alt="Formal wear 2"
           
         />
+        <div className="card-text">
+    <h3> Suit</h3>
+    <p>₦45000</p>
+  </div>
       </div>
 
-      <div className='card' onClick={() => handleCardClick("Formal Wear3")}>
+      <div className='card' onClick={() => handleCardClick("Formal Wear3",50000)}>
         <img
-          src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg"
+          // src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg"
+          src="https://www.shaadidukaan.com/vogue/wp-content/uploads/2019/08/Jodhpuri-Suit.jpeg"
           alt="Formal wear 3"
           
         />
         <div className="card-text">
-    <h3>Formal Wear</h3>
-    <p>Elegant styles for special occasions</p>
+    <h3> Bandhgala suit</h3>
+    <p>₦50000</p>
   </div>
       </div>
 
       <div className='card' onClick={() => handleCardClick("Formal Wear4")}>
         <img
-          src="https://images.pexels.com/photos/593570/pexels-photo-593570.jpeg"
+          // src="https://images.pexels.com/photos/593570/pexels-photo-593570.jpeg"
+          src="https://algopix.com/products/_next/image?url=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F31sRXiw4tIL._SL400_.jpg&w=828&q=75"
           alt="Formal wear 4"
           
         />
@@ -75,7 +90,8 @@ return (
 
       <div className='card' onClick={() => handleCardClick("Formal Wear5")}>
         <img
-          src="https://images.pexels.com/photos/428340/pexels-photo-428340.jpeg"
+          // src="https://images.pexels.com/photos/428340/pexels-photo-428340.jpeg"
+          src="https://i.etsystatic.com/24512336/r/il/91d713/2502167519/il_fullxfull.2502167519_hfjx.jpg"
           alt="Formal wear 5"
           
         />
@@ -83,10 +99,15 @@ return (
 
       <div className='card' onClick={() => handleCardClick("Formal Wear6")}>
         <img
-          src="https://images.pexels.com/photos/3775535/pexels-photo-3775535.jpeg"
+          // src="https://images.pexels.com/photos/3775535/pexels-photo-3775535.jpeg"
+          src="https://s.alicdn.com/@sc04/kf/H5d994cfb0e93490aa7539b53eddc4919x/H-D-African-Dashiki-Agbada-for-Men-Traditional-Outfit-Robe-3-PCS-Set-Long-Sleeve-Formal-Attire-for-Wedding-Wear.jpg"
           alt="Formal wear 6"
           
         />
+            <div className="card-text">
+    <h3> Agbada</h3>
+    <p>₦50000</p>
+  </div>
       </div>
 
     </div>
@@ -119,6 +140,14 @@ return (
     readOnly
     required
   />
+   {/* PRICE FIELD */}
+        <label htmlFor="price">Price</label>
+        <input
+          type="text"
+          id="price"
+          value={`₦${selectedPrice}`}
+          readOnly
+        />
 
  <label htmlFor="ageGroup">Age Group</label>
   <select id="ageGroup" name="ageGroup" required>
@@ -138,7 +167,7 @@ return (
   <select>
     <option value="">Select</option>
     <option value="urgent">Urgent(2-7days)</option>
-    <option value="noturgent">Not Urgent(>7days)</option>
+    <option value="noturgent">Not Urgent (&gt; 7 days)</option>
   </select>
 
 <label htmlFor="deliveryDate">Delivery Date</label>
