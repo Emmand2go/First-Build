@@ -142,3 +142,53 @@ nav button:hover {
 .cursor {
   animation: blink 1s infinite;
 }
+
+/* About css */
+/* Personal Section */
+.about-personal {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+.personal-text {
+  flex: 1;
+}
+
+.personal-image img {
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Gallery */
+.about-gallery {
+  background: #f4f4f4;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.gallery {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gallery img {
+  width: 280px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .about-personal {
+    flex-direction: column;
+    text-align: center;
+  }
+}

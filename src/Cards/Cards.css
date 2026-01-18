@@ -85,15 +85,97 @@ img {
 
 /* .container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 items per row */
-  grid-gap: 20px; /* Space between items */
-  padding: 20px; /* Adjust the padding to your liking */
+  grid-template-columns: repeat(3, 1fr);   /* 3 items per row 
+  grid-gap: 20px;    /* Space between items 
+  padding: 20px; /* Adjust the padding to your liking 
 } */
 
 /* .card {
-  width: 100%; /* Take up the full width of the grid cell */
+  width: 100%;   /* Take up the full width of the grid cell 
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 } */
+
+/* for uploadimage */
+/* Page layout */
+.upload-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f6f8;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Card */
+.upload-card {
+  background: #ffffff;
+  padding: 24px;
+  width: 360px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.upload-card h2 {
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: 20px;
+  color: #333;
+}
+
+/* File input */
+.file-input {
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #555;
+  transition: border-color 0.2s;
+}
+
+.file-input:hover {
+  border-color: #007bff;
+}
+
+.file-input input {
+  display: none;
+}
+
+/* Image preview */
+.preview-image {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #eee;
+}
+
+/* Button */
+.upload-btn {
+  padding: 10px;
+  background: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.upload-btn:hover {
+  background: #0056b3;
+}
+
+/* Status text */
+.status-text {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}

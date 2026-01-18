@@ -23,6 +23,7 @@ const Login = ({ onLoginSuccess }) => {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
+  const [user, setUser]=([])
 
   const handleLogin = async (e) => {
      // Validation check
@@ -45,9 +46,10 @@ setSubmitted(true);
         }
       );
 
-      const user  = response.data;
+      const userData  = response.data;
+
       // Store token and user info in localStorage
-      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(userData));
 // setIsAuthenticated(true)
       setSuccess("Login successful!");
       console.log("Response:", response.data);

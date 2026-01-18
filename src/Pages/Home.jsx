@@ -95,7 +95,7 @@ const Home = ({isAuthenticated}) => {
             "/upload1.jpg",
             "/upload.jpg",
           ]}
-          onClick={() => navigate("/native-wears")}
+          onClick={() => navigate("/uploads")}
         />
       </div>
     {/* <footer className="footer">

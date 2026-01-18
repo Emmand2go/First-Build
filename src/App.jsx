@@ -12,6 +12,9 @@ import About from './Pages/About';
 import Formal from './Cards/Formal';
 import Footer from './Pages/Footer';
 import PaymentPage from './Request/PaymentPage';
+import ImageUpload from './Cards/ImageUpload';
+import Native from './Cards/Native';
+import Schuni from './Cards/Schuni';
 
 function App() {
 const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -47,6 +50,9 @@ useEffect(() => {
  <Route path="/settings" element={<Settings />} />
    <Route path="/result" element={<Results />} />
    <Route path='/Formal-wears' element={<Formal/>}/>
+   <Route path='/uploads' element={<ImageUpload/>}/>
+   <Route path='/native-wears' element={<Native/>}/>
+   <Route path='/school-uniforms' element={<Schuni/>}/>
   </>
   ):(<Route path="*" element={<Navigate to="/" />} />)
   }
