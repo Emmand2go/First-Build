@@ -1,11 +1,13 @@
+
 .category-card {
   position: relative;
-  height: 330px;
+  height: 400px;
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
   /* box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); */
   transition: transform 0.3s ease;
+  
 }
 
 .category-card:hover {

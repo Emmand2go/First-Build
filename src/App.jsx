@@ -15,6 +15,7 @@ import PaymentPage from './Request/PaymentPage';
 import ImageUpload from './Cards/ImageUpload';
 import Native from './Cards/Native';
 import Schuni from './Cards/Schuni';
+import Chart from './Request/Chart';
 
 function App() {
 const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -42,6 +43,7 @@ useEffect(() => {
         <Route path="/register/*" element={<Register/>}/>
         <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
         <Route path='/pay' element={<PaymentPage/>}/>
+        <Route path='/chart' element={<Chart/>}/>
 {isAuthenticated ?(
     <>
   <Route path='/home' element={<Home isAuthenticated={isAuthenticated}/>}/>
@@ -53,6 +55,7 @@ useEffect(() => {
    <Route path='/uploads' element={<ImageUpload/>}/>
    <Route path='/native-wears' element={<Native/>}/>
    <Route path='/school-uniforms' element={<Schuni/>}/>
+   
   </>
   ):(<Route path="*" element={<Navigate to="/" />} />)
   }

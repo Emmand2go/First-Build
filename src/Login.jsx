@@ -16,18 +16,19 @@ import Dashboard from './Dashboarder/Dashboard';
 
 const Login = ({ onLoginSuccess }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState("")
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState("")
    const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
-  const [user, setUser]=([])
+  const [user, setUser]=useState([]);
+  const normalizedEmail=Email.trim().toLocaleLowerCase();
 
   const handleLogin = async (e) => {
      // Validation check
-  if (!email.trim() || !password.trim()) {
+  if (!Email.trim() || !Password.trim()) {
     setError("Please fill in all required fields.");
     return;
   }
@@ -39,14 +40,16 @@ const Login = ({ onLoginSuccess }) => {
 setSubmitted(true);
     try {
       const response =await axios.post (
-        "https://students-learning-api.onrender.com/api/auth/login",
+        // "https://students-learning-api.onrender.com/api/auth/login",
+        `${import.meta.env.VITE_BASE_URL}/api/users/login`,
         {
-          email,
-          password,
+          Email:normalizedEmail,
+          Password,
         }
       );
 
       const userData  = response.data;
+      setUser(userData);
 
       // Store token and user info in localStorage
       localStorage.setItem("user", JSON.stringify(userData));
@@ -151,12 +154,12 @@ setSubmitted(true);
             label="Email"
             type="email"
             autoComplete="email"
-            value={email}
+            value={Email}
              onChange={(e) => setEmail(e.target.value)}
               variant="outlined"
-              error={submitted && !email.trim()}
+              error={submitted && !Email.trim()}
   helperText={
-    submitted && !email.trim() ? "Email is required" : ""
+    submitted && !Email.trim() ? "Email is required" : ""
   }
             sx={{
               mb: 2,
@@ -168,14 +171,14 @@ setSubmitted(true);
           <TextField
             fullWidth
             label="Password"
-             value={password}
+             value={Password}
               onChange={(e) => setPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
             variant="outlined"
 
-            error={submitted && !password.trim()}
+            error={submitted && !Password.trim()}
   helperText={
-    submitted && !password.trim() ? "Password is required" : ""
+    submitted && !Password.trim() ? "Password is required" : ""
   }
             sx={{
               mb: 3,

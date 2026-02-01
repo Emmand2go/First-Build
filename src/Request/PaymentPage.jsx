@@ -9,21 +9,34 @@ export default function PaymentPage() {
   const navigate = useNavigate();
 
   // Fetch the booking data when the component mounts
-  useEffect(() => {
-    const fetchBookingData = async () => {
-      try {
-        const response = await axios.get("https://backend-dmwx.onrender.com/api/product/");
-        setBooking(response.data[0]);           // Store the booking data
-      } catch (err) {
-        console.error("Error fetching booking data:", err);
-        setError("Failed to load booking data.");
-      } finally {
-        setLoading(false); // Stop loading after the request finishes
-      }
-    };
+  // useEffect(() => {
+  //   const fetchBookingData = async () => {
+  //     try {
+  //       const response = await axios.get("https://backend-dmwx.onrender.com/api/product/");
+  //       setBooking(response.data[0]);           // Store the booking data
+  //     } catch (err) {
+  //       console.error("Error fetching booking data:", err);
+  //       setError("Failed to load booking data.");
+  //     } finally {
+  //       setLoading(false); // Stop loading after the request finishes
+  //     }
+  //   };
 
-    fetchBookingData();
-  }, []); // Empty dependency array means this runs only once when the component mounts
+  //   fetchBookingData();
+  // }, []); // Empty dependency array means this runs only once when the component mounts
+
+  useEffect(() => {
+    const storedData = sessionStorage.getItem("price");
+
+    if (!storedData) {
+      setError("Failed to retrieve data");
+      // user came here directly → send back
+      navigate("/");
+    } else {
+      setBooking(JSON.parse(storedData));
+    }
+  }, [navigate]);
+  if (!booking) return null;
 
   // Load Paystack script dynamically
   const loadPaystackScript = () => {

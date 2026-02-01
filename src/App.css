@@ -42,7 +42,7 @@ nav a:hover {
 /* Active link */
 nav a.active {
   color: #fff;
-  border-bottom: 2px solid #ff4d4f;
+  border-bottom: 2px solid #ffb347;
 }
 
 /* Logout button */
@@ -131,8 +131,15 @@ nav button:hover {
   gap: 25px;
   
 }
+/* @media (max-width: 1055px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+  }
+
+} */
 .card-grid img {
-  filter: brightness(0.3) contrast(1.1) sharpen(0.2);
+  filter: brightness(0.45) contrast(1.1) sharpen(0.2);
   width: 100%; /* Make the image fill its container */
   height: auto; /* Maintain aspect ratio */
   object-fit: cover;
@@ -167,7 +174,7 @@ nav button:hover {
 
 /* Gallery */
 .about-gallery {
-  background: #f4f4f4;
+  background: #f7f3ee;
   padding: 40px 20px;
   text-align: center;
 }

@@ -1,18 +1,24 @@
 import React, {useState,useEffect} from 'react'
 import './Cards.css'
 import UploadForm from './UploadForm';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 const Formal = () => {
    const [showForm, setShowForm] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [selectedPrice, setSelectedPrice] = useState("");
+  const [basePrice, setBasePrice] = useState(0);
   const [user,setUser]=useState('');
    const [minDate, setMinDate] = useState('');
    const [selectedImage, setSelectedImage] = useState("");
+   const [errorMessage, setErrorMessage] = useState("");
+   const navigate=useNavigate();
 
   const handleCardClick = (cardTitle,price,imageUrl) => {
     setSelectedCard(cardTitle);
     setSelectedPrice(price);
+    setBasePrice(price);
     setSelectedImage(imageUrl);
     setShowForm(true);
     
@@ -22,14 +28,16 @@ const Formal = () => {
     setShowForm(false);
     setSelectedCard(null);
     setSelectedPrice(null);
+    setBasePrice(null);
     setSelectedImage(null);
+    setErrorMessage(null);
   };
 
  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = JSON.parse(localStorage.getItem("user"));  // convert string to object
 
     if (storedUser) {
-      setUser(JSON.parse(storedUser)); // convert string to object
+      setUser(storedUser);  
     }
 
     const currentDate = new Date();
@@ -41,70 +49,114 @@ const Formal = () => {
     setMinDate(formattedDate); // Set the minimum date for the date input
   }, []);
 
+  const handleDateChange = (e) => {
+  const selectedDate = new Date(e.target.value);
+  const minAllowedDate = new Date(minDate);
+
+  // remove time for accurate day difference
+  selectedDate.setHours(0, 0, 0, 0);
+  minAllowedDate.setHours(0, 0, 0, 0);
+
+  const diffInDays =
+    (selectedDate - minAllowedDate) / (1000 * 60 * 60 * 24);
+
+  if (diffInDays <= 5) {
+    setSelectedPrice(basePrice + 20000);
+  } else {
+    setSelectedPrice(basePrice);
+  }
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+setErrorMessage(""); // clear previous errors
+try{
+  const formData = new FormData(e.target);
+
+  const payload = Object.fromEntries(formData.entries());
+
+  const res = await axios.post("/api/calculate-price", payload);
+
+  sessionStorage.setItem("price", res.data);
+  navigate("/pay");
+
+} catch (error) {
+    console.error(error);
+
+    // Show user-friendly error
+    if (error.response?.data?.message) {
+      setErrorMessage(error.response.data.message);
+    } else {
+      setErrorMessage("Something went wrong. Please try again.");
+    }
+  }
+};
 return (
   <>
     <div className='container'>
       
-      <div className='card' onClick={() => handleCardClick("Formal Wear",30000,"https://i.pinimg.com/736x/f8/85/5e/f8855eca2d50a8f58091a5f2443c0e5b.jpg")}>
+      <div className='card' onClick={() => handleCardClick("T-shirt",30000,"https://i.pinimg.com/736x/f8/85/5e/f8855eca2d50a8f58091a5f2443c0e5b.jpg")}>
         <img
           src="https://i.pinimg.com/736x/f8/85/5e/f8855eca2d50a8f58091a5f2443c0e5b.jpg"
           alt="Formal wear 1"
           
         />
         <div className="card-text">
-    <h3>T-shirt</h3>
     <p>₦30000</p>
   </div>
       </div>
 
-      <div className='card' onClick={() => handleCardClick("Formal Wear1",45000,"imageUrl")}>
+      <div className='card' onClick={() => handleCardClick("Suit",45000,"https://5.imimg.com/data5/EU/OR/MN/SELLER-34697614/l8-500x500.jpg")}>
         <img 
           src="https://5.imimg.com/data5/EU/OR/MN/SELLER-34697614/l8-500x500.jpg"
           alt="Formal wear 2"
           
         />
         <div className="card-text">
-    <h3> Suit</h3>
     <p>₦45000</p>
   </div>
       </div>
 
-      <div className='card' onClick={() => handleCardClick("Formal Wear3",50000)}>
+      <div className='card' onClick={() => handleCardClick("Bandhgala suit",50000,"https://www.shaadidukaan.com/vogue/wp-content/uploads/2019/08/Jodhpuri-Suit.jpeg")}>
         <img
           src="https://www.shaadidukaan.com/vogue/wp-content/uploads/2019/08/Jodhpuri-Suit.jpeg"
           alt="Formal wear 3"
           
         />
         <div className="card-text">
-    <h3> Bandhgala suit</h3>
     <p>₦50000</p>
   </div>
       </div>
 
-      <div className='card' onClick={() => handleCardClick("Formal Wear4")}>
+      <div className='card' onClick={() => handleCardClick("Formal Wear4",35000,"https://algopix.com/products/_next/image?url=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F31sRXiw4tIL._SL400_.jpg&w=828&q=75")}>
         <img
           src="https://algopix.com/products/_next/image?url=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F31sRXiw4tIL._SL400_.jpg&w=828&q=75"
           alt="Formal wear 4"
           
         />
+               <div className="card-text">
+    <p>₦35000</p>
+  </div>
       </div>
 
-      <div className='card' onClick={() => handleCardClick("Formal Wear5")}>
+      <div className='card' onClick={() => handleCardClick("Formal Wear5",60000,"https://i.etsystatic.com/24512336/r/il/91d713/2502167519/il_fullxfull.2502167519_hfjx.jpg")}>
         <img
           src="https://i.etsystatic.com/24512336/r/il/91d713/2502167519/il_fullxfull.2502167519_hfjx.jpg"
           alt="Formal wear 5"
           
         />
+               <div className="card-text">
+    <p>₦60000</p>
+  </div>
       </div>
 
-      <div className='card' onClick={() => handleCardClick("Formal Wear6")}>
+      <div className='card' onClick={() => handleCardClick("Agbada",50000,"https://s.alicdn.com/@sc04/kf/H5d994cfb0e93490aa7539b53eddc4919x/H-D-African-Dashiki-Agbada-for-Men-Traditional-Outfit-Robe-3-PCS-Set-Long-Sleeve-Formal-Attire-for-Wedding-Wear.jpg")}>
         <img
           src="https://s.alicdn.com/@sc04/kf/H5d994cfb0e93490aa7539b53eddc4919x/H-D-African-Dashiki-Agbada-for-Men-Traditional-Outfit-Robe-3-PCS-Set-Long-Sleeve-Formal-Attire-for-Wedding-Wear.jpg"
           alt="Formal wear 6"
           
         />
             <div className="card-text">
-    <h3> Agbada</h3>
     <p>₦50000</p>
   </div>
       </div>
@@ -118,8 +170,8 @@ return (
           <div className="form-box">
             <h2>{selectedCard}</h2>
 
-            <form>
-  <label htmlFor="name">Customer Name</label>
+            <form onSubmit={handleSubmit}>
+  <label htmlFor="name">Customer Name(Male only)</label>
   <input
     type="text"
     id="name"
@@ -129,25 +181,17 @@ return (
     required
   />
 
-  <label htmlFor="email">Email</label>
+  {/* <label htmlFor="email">Email</label> */}
   <input
-    type="email"
+    type="hidden"
     id="email"
     name="email"
     placeholder="Email"
     autoComplete="email"
-    value={user?.email || ''}
+    value={user?.user?.Email}
     readOnly
     required
   />
-   {/* PRICE FIELD */}
-        <label htmlFor="price">Price</label>
-        <input
-          type="text"
-          id="price"
-          value={`₦${selectedPrice}`}
-          readOnly
-        />
 
  <label htmlFor="ageGroup">Age Group</label>
   <select id="ageGroup" name="ageGroup" required>
@@ -163,15 +207,23 @@ return (
       <option value="adult">Adult (20+)</option>
     </optgroup>
   </select>
-  <label htmlFor='deadline'>Deadline</label>
-  <select>
-    <option value="">Select</option>
-    <option value="urgent">Urgent(2-7days)</option>
-    <option value="noturgent">Not Urgent (&gt; 7 days)</option>
-  </select>
+    {/* PRICE FIELD */}
+        <label htmlFor="price">Price</label>
+        <input
+          type="text"
+          id="price"
+          value={`₦${selectedPrice}`}
+          readOnly
+        />
+{selectedPrice > basePrice && (
+  <p style={{ color: "red" }}>
+    Rush fee of ₦20,000 applied (delivery within 5 days)
+  </p>
+)}
 
 <label htmlFor="deliveryDate">Delivery Date</label>
-  <input type="date" id="deliveryDate" name="deliveryDate" min={minDate} />
+  <input type="date" id="deliveryDate" name="deliveryDate" min={minDate} onChange={handleDateChange} />
+
 <input type="hidden" name="cardImage" value={selectedImage} />
   <label htmlFor="message">Message</label>
   <textarea
@@ -179,7 +231,14 @@ return (
     name="message"
     placeholder="Input Measurement/Message"
     autoComplete="off"
+    required
   />
+
+  {errorMessage && (
+  <p style={{ color: "red", marginBottom: "10px" }}>
+    {errorMessage}
+  </p>
+)}
 
   <button type="submit">Submit</button>
   <button type="button" onClick={closeForm}>Close</button>

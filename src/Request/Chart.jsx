@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./CustomerProgressPage.css";
+// import "./CustomerProgressPage.css";
 
 export default function Chart() {
   const { orderId } = useParams();
