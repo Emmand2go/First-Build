@@ -1,6 +1,8 @@
 // import { nav } from 'framer-motion/client'
 import React from 'react'
 import { Link, NavLink ,useNavigate} from 'react-router-dom'
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import Chart from '../Request/Chart';
 
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
 <NavLink to="/home" className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
       <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>About</NavLink>
       {/* <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "active" : "")}>Dashboard</NavLink> */}
+<button title="Go to cart" aria-label="Go to cart" onClick={()=>navigate("/chart")}><ShoppingBagIcon /></button>
       <button onClick={handleLogout}>Logout</button>
     </nav>
 </div>

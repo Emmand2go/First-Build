@@ -243,6 +243,7 @@ setSubmitted(true);
               Sign Up
             </span>
           </Typography>
+          <Typography><a href="/forgot-password">Forgot Password</a></Typography>
         </Paper>
       </motion.div>
     

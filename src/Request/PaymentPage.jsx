@@ -9,48 +9,59 @@ export default function PaymentPage() {
   const navigate = useNavigate();
 
   // Fetch the booking data when the component mounts
-  // useEffect(() => {
-  //   const fetchBookingData = async () => {
-  //     try {
-  //       const response = await axios.get("https://backend-dmwx.onrender.com/api/product/");
-  //       setBooking(response.data[0]);           // Store the booking data
-  //     } catch (err) {
-  //       console.error("Error fetching booking data:", err);
-  //       setError("Failed to load booking data.");
-  //     } finally {
-  //       setLoading(false); // Stop loading after the request finishes
-  //     }
-  //   };
-
-  //   fetchBookingData();
-  // }, []); // Empty dependency array means this runs only once when the component mounts
-
   useEffect(() => {
-    const storedData = sessionStorage.getItem("price");
+    const fetchBookingData = async () => {
+      try {
+        // const response = await axios.get("https://backend-dmwx.onrender.com/api/product/");
+        const response = await axios.get("http://localhost:4000/api/product/");
+        setBooking(response.data[0]);           // Store the booking data
+      } catch (err) {
+        console.error("Error fetching booking data:", err);
+        setError("Failed to load booking data.");
+      } finally {
+        setLoading(false); // Stop loading after the request finishes
+      }
+    };
 
-    if (!storedData) {
-      setError("Failed to retrieve data");
-      // user came here directly → send back
-      navigate("/");
-    } else {
-      setBooking(JSON.parse(storedData));
-    }
-  }, [navigate]);
-  if (!booking) return null;
+    fetchBookingData();
+  }, []); // Empty dependency array means this runs only once when the component mounts
+
+  // useEffect(() => {
+  //   const storedData = sessionStorage.getItem("price");
+
+  //   if (!storedData) {
+  //     setError("Failed to retrieve data");
+  //     // user came here directly → send back
+  //     navigate("/");
+  //   } else {
+  //     setBooking(JSON.parse(storedData));
+  //   }
+  // }, [navigate]);
+  // if (!booking) return null;
 
   // Load Paystack script dynamically
   const loadPaystackScript = () => {
     return new Promise((resolve) => {
       if (window.PaystackPop) return resolve(true);
       const script = document.createElement("script");
-      script.src = "https://js.paystack.co/v1/inline.js";
+      script.src  = "https://js.paystack.co/v1/inline.js";
+
+//  // 👇 IMPORTANT if your CSP uses nonces
+//     const nonce = document
+//       .querySelector('meta[name="csp-nonce"]')
+//       ?.getAttribute("content");
+
+//     if (nonce) {
+//       script.setAttribute("nonce", nonce);
+//     }
+
       script.onload = () => resolve(true);
       document.body.appendChild(script);
     });
   };
 
   const handlePay = async () => {
-    if (!booking) return; // Ensure booking data is available before proceeding
+    // if (!booking) return; // Ensure booking data is available before proceeding
 
     const amountInKobo = booking.price * 100;
   //    // Check if the email is valid
@@ -62,8 +73,8 @@ export default function PaymentPage() {
     if (!loaded) return alert("Failed to load payment gateway");
 
     const handler = window.PaystackPop.setup({
-key: "pk_test_088dc022605cd213d2537b660f45b3fc55c8518d",
-      // key: process.env.REACT_APP_PAYSTACK_PUBLIC, // live/test key
+// key: "pk_test_088dc022605cd213d2537b660f45b3fc55c8518d",
+      key: import.meta.env.VITE_APP_PAYSTACK_PUBLIC, // live/test key
       email:"Princechisom2001@Outlook.com",                                     //booking.email,
       amount: amountInKobo,
       ref: new Date().getTime().toString(),

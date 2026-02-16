@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-import {BrowserRouter as Router,Routes, Route, Navigate, useLocation } from "react-router-dom";
+import {BrowserRouter as Router,Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import './App.css'
 import Register from './Register';
 import Login from './Login';
@@ -16,12 +16,19 @@ import ImageUpload from './Cards/ImageUpload';
 import Native from './Cards/Native';
 import Schuni from './Cards/Schuni';
 import Chart from './Request/Chart';
+import VerifyOtp from './Request/VerifyOtp';
+import ResetPassword from './Request/ResetKey';
+import ForgotPassword from './Request/Forgetkey';
 
 function App() {
 const [isAuthenticated, setIsAuthenticated] = useState(false);
 const location = useLocation();  // <-- detect current route
+const token=useParams();
 // const onRegisterPage= location.pathname==="/register";
 const onRegisterPage = location.pathname.startsWith("/register");
+const onVerifyOtpPage = location.pathname === "/verify-otp";
+const  onForgetPage=location.pathname ==="/forgot-password";
+const onResetPage= location.pathname.startsWith("/reset-password/")
 
 // Check if user is already logged in (persist login)
 useEffect(() => {
@@ -36,14 +43,19 @@ useEffect(() => {
     <>
     {/* {isAuthenticated && <Navbar setIsAuthenticated={setIsAuthenticated}/>}  this was not allowing navbar show when redirected*/}
 <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
+
 {/* Content wrapper: becomes blurred + unclickable */}
-      <div className={`content-wrapper ${!isAuthenticated && !onRegisterPage ? "disabled" : ""}`}>
+      <div className={`content-wrapper ${!isAuthenticated && !onRegisterPage && !onVerifyOtpPage && !onForgetPage&& !onResetPage ? "disabled" : ""}`}>
       <Routes>
         {/* <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated}/>} /> */}
         <Route path="/register/*" element={<Register/>}/>
         <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
         <Route path='/pay' element={<PaymentPage/>}/>
         <Route path='/chart' element={<Chart/>}/>
+        <Route path='/verify-otp' element={<VerifyOtp/>}/>
+        <Route path='/forgot-password' element={<ForgotPassword/>}/>
+        <Route path='/reset-password/:token' element={<ResetPassword/>}/>
+        
 {isAuthenticated ?(
     <>
   <Route path='/home' element={<Home isAuthenticated={isAuthenticated}/>}/>
@@ -56,12 +68,14 @@ useEffect(() => {
    <Route path='/native-wears' element={<Native/>}/>
    <Route path='/school-uniforms' element={<Schuni/>}/>
    
+   
   </>
   ):(<Route path="*" element={<Navigate to="/" />} />)
   }
       </Routes>
       </div>
-   {!isAuthenticated && !onRegisterPage &&(   <Login onLoginSuccess={() => setIsAuthenticated(true)}/>)}
+    
+   {!isAuthenticated && !onRegisterPage && !onVerifyOtpPage && !onForgetPage&&!onResetPage&&(   <Login onLoginSuccess={() => setIsAuthenticated(true)}/>)}
     <Footer/>
     </>
   );
