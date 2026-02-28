@@ -8,10 +8,11 @@ import React from "react";
 const About = () => {
 const tailorImg =
     "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9";
-  const shopImg =
-    "https://images.unsplash.com/photo-1582735689369-4fe89db7114c";
+  const shopImg ="https://content.jdmagicbox.com/comp/coimbatore/e9/0422px422.x422.121112132720.n5e9/catalogue/jeans-tailors-vadamadurai-kurudampalayam-coimbatore-gents-tailors-1bllo2h.jpg"
+    // "https://images.unsplash.com/photo-1582735689369-4fe89db7114c";
   const workImg =
-    "https://images.unsplash.com/photo-1593032457866-e555d65b3f8f";
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9jqt5up8hAC4gLlsQKi09h67G1moThadQ3w&s"
+    // "https://images.unsplash.com/photo-1593032457866-e555d65b3f8f";
 
   return (
     <div className="about-page">
@@ -24,7 +25,7 @@ const tailorImg =
       {/* Personal Section */}
       <section className="about-personal">
         <div className="personal-text">
-          <h2>Your Trusted Tailor</h2>
+          <h2 style={{color:"white"}}>Your Trusted Tailor</h2>
           <p>
             I am a professional tailor dedicated to delivering perfectly fitted
             garments. With years of experience, I focus on quality stitching,
@@ -33,7 +34,7 @@ const tailorImg =
         </div>
 
         <div className="personal-image">
-          <img src={tailorImg} alt="Professional Tailor" />
+          <img src="./mypics.png" alt="Professional Tailor" style={{height:"300px"}}/>
         </div>
       </section>
 
@@ -41,14 +42,14 @@ const tailorImg =
       <section className="about-gallery">
         <h2>My Work & Shop</h2>
         <div className="gallery">
-          <img src={shopImg} alt="Tailor Shop" />
           <img src={workImg} alt="Tailoring Work" />
+          <img src={shopImg} alt="Tailor Shop" />
         </div>
       </section>
 
       {/* Location */}
       <section className="about-location">
-        <h2>Visit My Shop</h2>
+        <h2 style={{color:"white"}}>Visit My Shop</h2>
         <iframe
           title="Tailor Location"
           // src="https://www.google.com/maps?q=YOUR_LOCATION_HERE&output=embed"
@@ -63,9 +64,9 @@ const tailorImg =
 
       {/* Contact */}
       <section className="about-contact">
-        <h2>Contact Me</h2>
-        <p>📞 Phone: +1 234 567 890</p>
-        <p>📧 Email: tailor@example.com</p>
+        <h2 style={{color:"white"}}>Contact Me</h2>
+        <p>📞 Phone: +234 7089400213</p>
+        <p>📧 Email: ndubuisiemmanuel211@yahoo.com</p>
       </section>
     </div>
   );

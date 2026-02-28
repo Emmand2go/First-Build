@@ -67,14 +67,22 @@ const Native = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 setErrorMessage(""); // clear previous errors
+sessionStorage.removeItemItem("price_form")
 try{
   const formData = new FormData(e.target);
 
   const payload = Object.fromEntries(formData.entries());
+  const token=localStorage.getItem("token")
 
-  const res = await axios.post("/api/calculate-price", payload);
+  const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/order/`,payload,
+     {
+      headers: {
+        "Authorization": `Bearer ${token}`, // <-- send token here
+      }
+    }
+  );
 
-  sessionStorage.setItem("price", res.data);
+  sessionStorage.setItem("price", JSON.stringify(res.data));
   navigate("/pay");
 
 } catch (error) {
@@ -209,6 +217,7 @@ try{
         <input
           type="text"
           id="price"
+          name="price"
           value={`₦${selectedPrice}`}
           readOnly
         />
@@ -217,6 +226,9 @@ try{
     Rush fee of ₦20,000 applied (delivery within 5 days)
   </p>
 )}
+
+<input type="hidden" name="basePrice" value={basePrice} /> //1
+<input type="hidden" name="selectedCard" value={selectedCard} /> //2
 
 <label htmlFor="deliveryDate">Delivery Date</label>
   <input type="date" id="deliveryDate" name="deliveryDate" min={minDate} onChange={handleDateChange} />

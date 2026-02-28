@@ -55,7 +55,7 @@ const Home = ({isAuthenticated}) => {
         <div className='up'>
           <h1 style={{fontSize:'4rem',color:'#ff4d4f'}} className='hero-text'>{displayText}{!typingDone && <span className="cursor">|</span>}</h1>
           <p style={{fontSize:'3rem',color:'#ff4d4f'}}>Making clothes that defines Boys/Men</p>
-          <a href="#" style={{color:'white',textDecoration:'none',backgroundColor:'#ff4d4f',border:'1px',borderRadius:'2px'}}>Learn More</a>
+          <a href="/about" style={{color:'white',textDecoration:'none',backgroundColor:'#ff4d4f',border:'1px',borderRadius:'2px'}}>Learn More</a>
         </div>
       </section>
       <div className="card-grid">

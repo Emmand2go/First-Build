@@ -19,11 +19,12 @@ import Chart from './Request/Chart';
 import VerifyOtp from './Request/VerifyOtp';
 import ResetPassword from './Request/ResetKey';
 import ForgotPassword from './Request/Forgetkey';
+import UploadForm from './Cards/UploadForm';
 
 function App() {
 const [isAuthenticated, setIsAuthenticated] = useState(false);
 const location = useLocation();  // <-- detect current route
-const token=useParams();
+const { token, id } = useParams();
 // const onRegisterPage= location.pathname==="/register";
 const onRegisterPage = location.pathname.startsWith("/register");
 const onVerifyOtpPage = location.pathname === "/verify-otp";
@@ -40,7 +41,7 @@ useEffect(() => {
   }, []);
 
   return (
-    <>
+   <div className="app-container">
     {/* {isAuthenticated && <Navbar setIsAuthenticated={setIsAuthenticated}/>}  this was not allowing navbar show when redirected*/}
 <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
 
@@ -55,15 +56,16 @@ useEffect(() => {
         <Route path='/verify-otp' element={<VerifyOtp/>}/>
         <Route path='/forgot-password' element={<ForgotPassword/>}/>
         <Route path='/reset-password/:token' element={<ResetPassword/>}/>
+        <Route path='/details-form/:id' element={<UploadForm/>}></Route>
         
 {isAuthenticated ?(
     <>
   <Route path='/home' element={<Home isAuthenticated={isAuthenticated}/>}/>
   <Route path='/about' element={<About/>}/>
- {/* <Route path='/dashboard' element={<Dashboard/>}/> */}
  <Route path="/settings" element={<Settings />} />
    <Route path="/result" element={<Results />} />
    <Route path='/Formal-wears' element={<Formal/>}/>
+   
    <Route path='/uploads' element={<ImageUpload/>}/>
    <Route path='/native-wears' element={<Native/>}/>
    <Route path='/school-uniforms' element={<Schuni/>}/>
@@ -77,7 +79,7 @@ useEffect(() => {
     
    {!isAuthenticated && !onRegisterPage && !onVerifyOtpPage && !onForgetPage&&!onResetPage&&(   <Login onLoginSuccess={() => setIsAuthenticated(true)}/>)}
     <Footer/>
-    </>
+    </div>
   );
 }
 

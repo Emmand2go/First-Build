@@ -179,3 +179,43 @@ img {
   font-size: 14px;
   color: #666;
 }
+
+
+/* for imageupload */
+.processing-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack content vertically */
+  z-index: 10000; /* Higher z-index */
+}
+
+.processing-box {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  text-align: center;
+  color: black; /* Make sure text is visible */
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ddd;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px; /* Added extra margin for spacing */
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

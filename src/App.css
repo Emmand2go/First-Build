@@ -199,3 +199,24 @@ nav button:hover {
     text-align: center;
   }
 }
+
+
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the body fills the screen */
+}
+
+.content-wrapper {
+  flex: 1; /* Takes up the available space, pushing footer down */
+  overflow: auto; /* Allows content to scroll if needed */
+}
+
+/* Optional: Add padding to the footer to make it look better */
+footer {
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+}

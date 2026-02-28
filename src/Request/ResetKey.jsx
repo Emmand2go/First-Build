@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Box, TextField, Button, Typography, Paper, CircularProgress } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios from "axios";
 
 const ResetPassword = () => {
@@ -11,6 +12,7 @@ const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,8 +50,21 @@ const ResetPassword = () => {
             required
             inputProps={{ minLength: 6 }}
             sx={{ mb: 2 }}
+             // Add password visibility toggle
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setShowPassword(!showPassword)} // Toggle visibility
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />} {/* Toggle icon */}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
-          <Button fullWidth type="submit" variant="contained">
+          <Button fullWidth type="submit" variant="contained" disabled={loading}>
             {loading ? <CircularProgress size={24} color="inherit" /> : "Reset Password"}
           </Button>
         </form>

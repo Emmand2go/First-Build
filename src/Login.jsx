@@ -53,6 +53,10 @@ setSubmitted(true);
 
       // Store token and user info in localStorage
       localStorage.setItem("user", JSON.stringify(userData));
+       // Store token separately
+    if (userData.token) {
+      localStorage.setItem("token", userData.token);
+    }
 // setIsAuthenticated(true)
       setSuccess("Login successful!");
       console.log("Response:", response.data);
