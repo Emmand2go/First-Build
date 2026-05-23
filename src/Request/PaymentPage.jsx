@@ -9,6 +9,7 @@ export default function PaymentPage() {
   const [error, setError] = useState(null); // State for error handling
   const navigate = useNavigate();
   
+  
 
   // Fetch the booking data when the component mounts
   // useEffect(() => {
@@ -103,7 +104,7 @@ script.async = true;
 
     paystack.newTransaction({
       key: import.meta.env.VITE_APP_PAYSTACK_PUBLIC,
-      email: booking?.email || "godwin@gmail.com",
+      email: booking?.email,
       amount: Math.round(booking.finalPrice * 100),
       ref: String(booking.paymentReference),
       
@@ -122,7 +123,7 @@ script.async = true;
             alert("Payment verified!");
             sessionStorage.removeItem("price");
              sessionStorage.setItem("paymentRef", transaction.reference);
-            navigate("/chart");
+            navigate("/chart/:email");
             // navigate(`/chart/${verifyRes.data.order._id}`);
           }
         } catch (error) {

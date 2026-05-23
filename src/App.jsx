@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-import {BrowserRouter as Router,Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
+import {BrowserRouter as Router,Routes, Route, Navigate, useLocation, } from "react-router-dom";
 import './App.css'
 import Register from './Register';
 import Login from './Login';
@@ -23,8 +23,8 @@ import UploadForm from './Cards/UploadForm';
 
 function App() {
 const [isAuthenticated, setIsAuthenticated] = useState(false);
+const [user,setUser]=useState([])
 const location = useLocation();  // <-- detect current route
-const { token, id } = useParams();
 // const onRegisterPage= location.pathname==="/register";
 const onRegisterPage = location.pathname.startsWith("/register");
 const onVerifyOtpPage = location.pathname === "/verify-otp";
@@ -34,12 +34,14 @@ const onResetPage= location.pathname.startsWith("/reset-password/")
 // Check if user is already logged in (persist login)
 useEffect(() => {
     // const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
-    if (user) {
+    const User = JSON.parse(localStorage.getItem("user"));
+    if (User) {
+      setUser(User);
       setIsAuthenticated(true);
     }
+   
   }, []);
-
+const email=user?.Email
   return (
    <div className="app-container">
     {/* {isAuthenticated && <Navbar setIsAuthenticated={setIsAuthenticated}/>}  this was not allowing navbar show when redirected*/}
@@ -53,6 +55,7 @@ useEffect(() => {
         <Route path="/" element={<Home isAuthenticated={isAuthenticated} />} />
         <Route path='/pay' element={<PaymentPage/>}/>
         <Route path='/chart' element={<Chart/>}/>
+        {/* <Route path=`(/chart/${email})` element={<Chart/>}/> */}
         <Route path='/verify-otp' element={<VerifyOtp/>}/>
         <Route path='/forgot-password' element={<ForgotPassword/>}/>
         <Route path='/reset-password/:token' element={<ResetPassword/>}/>

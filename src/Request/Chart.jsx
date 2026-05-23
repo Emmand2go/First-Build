@@ -4,6 +4,8 @@ import axios from "axios";
 
 export default function Chart() {
   // const { orderId } = useParams();
+  // const {email}= useParams();
+  // const email=localStorage.getItem("user.email")
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,6 +28,8 @@ export default function Chart() {
 
 useEffect(() => {
     const fetchOrders = async () => {
+      // if (!email) return;
+      // const orders=localStorage.getItem("user")
       const token = localStorage.getItem("token");
 console.log("Token from localStorage:", localStorage.getItem("token"));
 
@@ -43,20 +47,27 @@ console.log("Token from localStorage:", localStorage.getItem("token"));
           }
         );
         
-
-        // Ensure orders is always an array
-        const ordersArray = Array.isArray(res.data) ? res.data : [res.data];
-        setOrders(ordersArray);
-      } catch (err) {
-        console.error("Fetch error details:", err.response?.data || err.message);
-        setError(err.response?.data?.message||"Failed to fetch orders.");
-      } finally {
-        setLoading(false);
+// FIX: Access the 'orders' property from your backend response
+      // Your backend sends { message: "...", orders: [] }
+      if (res.data && res.data.orders) {
+        setOrders(res.data.orders);
+      } else if (Array.isArray(res.data)) {
+        setOrders(res.data);
+      } else {
+        setOrders([]);
       }
-    };
+    } catch (err) {
+      console.error("Fetch error:", err.response?.data || err.message);
+      setError(err.response?.data?.message || "Failed to fetch orders.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchOrders();
-  }, []);
+  fetchOrders();
+}, []);
+
+ 
 
 
   if (loading) return <div className="loader">Loading your order...</div>;
@@ -104,6 +115,20 @@ console.log("Token from localStorage:", localStorage.getItem("token"));
 
 
  
+
+ //       // Ensure orders is always an array
+  //       const ordersArray = Array.isArray(res.data) ? res.data : [res.data];
+  //       setOrders(ordersArray);
+  //     } catch (err) {
+  //       console.error("Fetch error details:", err.response?.data || err.message);
+  //       setError(err.response?.data?.message||"Failed to fetch orders.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchOrders();
+  // }, []);
 
 
     // useEffect(() => {

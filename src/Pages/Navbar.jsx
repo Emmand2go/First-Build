@@ -5,14 +5,16 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Chart from '../Request/Chart';
 
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
+// const user = JSON.parse(localStorage.getItem("user"));
+// const email = user?.user.Email;
   const navigate = useNavigate();
+
     const handleLogout = () => {
-    setIsAuthenticated(false);
-    navigate("/");
 // the below nullify the effect in app.jsx:67
     localStorage.removeItem("token");
   localStorage.removeItem("user");
   setIsAuthenticated(false);
+  navigate("/");
   };
 
    // Only render navbar if the user is authenticated
@@ -25,7 +27,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
 <NavLink to="/home" className={({ isActive }) => (isActive ? "active" : "")}>Home</NavLink>
       <NavLink to="/about" className={({ isActive }) => (isActive ? "active" : "")}>About</NavLink>
       {/* <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "active" : "")}>Dashboard</NavLink> */}
-<button title="Go to cart" aria-label="Go to cart" onClick={()=>navigate("/chart")}><ShoppingBagIcon /></button>
+<button title="Go to cart" aria-label="Go to cart" onClick={()=>navigate('/chart')}><ShoppingBagIcon /></button>
       <button onClick={handleLogout}>Logout</button>
     </nav>
 </div>

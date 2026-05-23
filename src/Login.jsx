@@ -24,7 +24,7 @@ const Login = ({ onLoginSuccess }) => {
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [user, setUser]=useState([]);
-  const normalizedEmail=Email.trim().toLocaleLowerCase();
+  const normalizedEmail=Email.trim().toLowerCase();
 
   const handleLogin = async (e) => {
      // Validation check
